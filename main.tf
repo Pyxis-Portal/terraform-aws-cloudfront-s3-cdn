@@ -27,7 +27,7 @@ locals {
     disabled = local.origin_bucket_placeholder
   }
   # Workaround for requirement that tertiary expression has to have exactly matching objects in both result values
-  origin_bucket = local.origin_bucket_options[local.enabled ? (local.create_s3_origin_bucket ? "new" : "existing") : "disabled"]
+  origin_bucket = local.origin_bucket_options[local.enabled ? (local.create_s3_origin_bucket ? "new" : ( var.enable_origin_bucket_creation ? "existing" : "disabled")) : "disabled"]
 
   # Collect the information for cloudfront_origin_access_identity_iam and shorten the variable names
   cf_access_options = {
